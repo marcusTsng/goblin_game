@@ -1,6 +1,8 @@
 import pygame
 from enum import Enum
 
+GRAVITY = 0.05
+
 class GameState(Enum):
     NONE = 0
     MENU = 1
@@ -8,7 +10,7 @@ class GameState(Enum):
 
 class Game:
     instance = None
-    def __init__(self, screen):
+    def __init__(self, screen, player):
         # singleton
         if Game.instance != None and Game.instance != self: 
             del self
@@ -19,6 +21,7 @@ class Game:
 
         # game properties
         self.state = GameState.NONE
+        self.player = player
     
     @staticmethod
     def get_instance() -> Game:

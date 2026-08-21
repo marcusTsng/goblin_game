@@ -1,23 +1,16 @@
 import pygame
 from Sprites import Sprite
-from GameManager import Game
+from GameManager import Game, GRAVITY
 
 SPEED = 0.8
 FLOOR_Y = 600
 BRIDGE_Y = 300
 JUMP_POWER = 6
 FALL_POWER = 4
-GRAVITY = 0.05
-
-game : Game = None
 
 class Player(Sprite):
     def __init__(self, x, y, active=True):
         super().__init__("Assets/placeholder.png", x, y, active)
-        global game
-
-        game = Game.get_instance()
-
         self._jumping = False
         self.on_bridge = False
         self._jump_movement = 0
