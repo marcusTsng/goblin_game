@@ -2,6 +2,7 @@ import pygame
 from enum import Enum
 
 GRAVITY = 0.3
+TIME_STEP_SIZE = 0.05
 
 class GameState(Enum):
     NONE = 0
@@ -25,6 +26,10 @@ class Game:
         self.player = player
 
         self.delta_time = None
+        self.time_passed = 0
+        self.time_steps = 0
+
+        self._last_time_step = 0
     
     @staticmethod
     def get_instance() -> Game:
@@ -35,3 +40,9 @@ class Game:
 
     def tick(self):
         self.delta_time = self.clock.tick(60) / 10
+        self.time_passed = pygame.time.get_ticks() / 1000
+
+        if self.time_passed - self._last_time_step >= TIME_STEP_SIZE:
+            print(self.time_passed)
+            self._last_time_step = self.time_passed
+            self.time_steps += 1
