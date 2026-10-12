@@ -3,15 +3,23 @@ from enum import Enum
 
 pygame.init() 
 
+def scale_image(img, sf=4):
+    w, h = img.get_width(), img.get_height()
+    nw, nh = int(w * sf), int(h*sf)
+    
+    return pygame.transform.scale(img, (nw, nh))
+
 class Sprite(pygame.sprite.Sprite):
     all_sprites = pygame.sprite.Group()
 
-    def __init__(self, image, x, y, active=True):
+    def __init__(self, image, x, y, active=True, scale=False):
         super().__init__() 
 
         self.active = active
 
-        self.image = pygame.image.load(image).convert_alpha()
+        img = pygame.image.load(image).convert_alpha()
+        self.image = img if not scale else scale_image(img)
+
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
         self.pos = (x, y)

@@ -1,7 +1,7 @@
 import pygame
 from enum import Enum
 
-GRAVITY = 0.05
+GRAVITY = 0.3
 
 class GameState(Enum):
     NONE = 0
@@ -18,10 +18,13 @@ class Game:
         
         # game setup
         self.screen : pygame.Surface = screen
+        self.clock = pygame.time.Clock()
 
         # game properties
         self.state = GameState.NONE
         self.player = player
+
+        self.delta_time = None
     
     @staticmethod
     def get_instance() -> Game:
@@ -29,3 +32,6 @@ class Game:
     
     def start_game(self):
         self.state = GameState.INGAME
+
+    def tick(self):
+        self.delta_time = self.clock.tick(60) / 10

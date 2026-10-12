@@ -2,8 +2,8 @@ import pygame
 from Sprites import Sprite
 from GameManager import Game, GRAVITY
 
-PEBBLE_SPEED = 20
-PEBBLE_WEIGHT = GRAVITY * 8
+PEBBLE_SPEED = 18
+PEBBLE_WEIGHT = GRAVITY * 3
 PEBBLE_DESPAWN_HEIGHT = 700
 
 class Item:
@@ -33,8 +33,9 @@ class Pebble(Item):
         self._dir = (0,0)
 
     def activate(self):
+        dt = Game.get_instance().delta_time
         if self.pebble:
-            self.pebble.move(self._dir[0], self._dir[1])
+            self.pebble.move(self._dir[0] * dt, self._dir[1] * dt)
             self._dir = (self._dir[0], self._dir[1]+PEBBLE_WEIGHT)
 
             if self.pebble.pos[1] >= PEBBLE_DESPAWN_HEIGHT:

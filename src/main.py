@@ -29,6 +29,8 @@ if __name__ == "__main__":
     # GAME LOOP
     running = True
     while running:
+        game.tick()
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT: 
                 running = False
