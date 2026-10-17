@@ -4,6 +4,7 @@ from Sprites import Sprite, Text, Fonts, Button
 from Items import Item, Pebble
 from GameManager import Game, GameState
 from Player import Player
+from Enemies import Enemy
 
 SCREEN_WIDTH, SCREEN_HEIGHT = 800, 800
 
@@ -50,6 +51,9 @@ if __name__ == "__main__":
                 x.source.set_active(True)
             player.set_active(True)
         
+        # ENEMY SPAWN
+        Enemy.handle_enemy_spawns()
+
         screen.fill((255,255,255))
         Sprite.all_sprites.update()
         Item.update()

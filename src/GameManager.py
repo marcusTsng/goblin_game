@@ -39,10 +39,10 @@ class Game:
         self.state = GameState.INGAME
 
     def tick(self):
-        self.delta_time = self.clock.tick(60) / 10
-        self.time_passed = pygame.time.get_ticks() / 1000
+        if self.state != GameState.INGAME:
+            self.delta_time = self.clock.tick(60) / 10
+            self.time_passed = pygame.time.get_ticks() / 1000
 
-        if self.time_passed - self._last_time_step >= TIME_STEP_SIZE:
-            print(self.time_passed)
-            self._last_time_step = self.time_passed
-            self.time_steps += 1
+            if self.time_passed - self._last_time_step >= TIME_STEP_SIZE:
+                self._last_time_step = self.time_passed
+                self.time_steps += 1
